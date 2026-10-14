@@ -1,6 +1,6 @@
 # Lusor
 
-**AI friends that can use your phone, literally.**
+**Put AI agents to work on your phone.**
 
 Lusor is an AI agent that operates a real phone for you, either your own iPhone or a Lusor cloud phone. Give it a task in plain language and it opens the apps, taps, types and reports back, with a recording of everything it did.
 

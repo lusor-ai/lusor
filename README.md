@@ -25,7 +25,7 @@ Lusor agents use real apps on a real phone: your own iPhone or Android, or a Lus
 | You want to | Use | Start here |
 | --- | --- | --- |
 | Hand tasks to an agent on your own **iPhone** | Lusor for Mac (Apple silicon), which connects the iPhone | [Connect your iPhone](https://docs.lusor.ai/help/connect-your-iphone) |
-| Hand tasks to an agent on your own **Android** phone | Lusor Launcher on the phone. No cable, no computer | [Connect your Android phone](https://docs.lusor.ai/help/connect-your-android) |
+| Hand tasks to an agent on your own **Android** phone | Lusor Launcher on the phone. No cable; you approve its sign-in once from a computer | [Connect your Android phone](https://docs.lusor.ai/help/connect-your-android) |
 | Give the agent **its own phone** | A Lusor Phone in the cloud, from [app.lusor.ai](https://app.lusor.ai) | [Lusor Phones](https://docs.lusor.ai/help/lusor-phones) |
 | Run agents **from your own code** | The Lusor API | [Quickstart](https://docs.lusor.ai/quickstart) |
 | Use your phones from **Claude, ChatGPT, Cursor, Codex** and other AI apps | The Lusor MCP server | [Connect an AI app](https://docs.lusor.ai/connect) |
@@ -64,7 +64,7 @@ The full walkthrough, including how to follow the session and read the result, i
 
 ## What you get
 
-- **Recordings and replay.** Every run is recorded. Watch it back as video or step through it action by action.
+- **Recordings and replay.** Every task you send an agent is recorded. Watch it back as video, or step through it action by action.
 - **The agent asks when it needs you.** When it reaches a sign-in or a decision, it pauses, asks you a question and waits for your answer.
 - **Structured output.** Get the result back as JSON in a shape you define.
 - **Direct control.** Read the screen, tap, type, swipe and launch apps yourself, up to 20 actions per request.

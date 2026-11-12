@@ -1,0 +1,56 @@
+{
+  "name": "@lusor/sdk",
+  "version": "1.1.0",
+  "description": "TypeScript client for the Lusor API: agent runs, sessions, devices and direct phone control. Generated from the Lusor OpenAPI specification.",
+  "homepage": "https://docs.lusor.ai",
+  "bugs": {
+    "email": "support@lusor.ai"
+  },
+  "keywords": [
+    "lusor",
+    "android",
+    "iphone",
+    "mobile automation",
+    "ai agent",
+    "phone",
+    "sdk",
+    "api",
+    "typescript",
+    "mobile agent",
+    "device control"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE-APACHE-2.0.txt"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "typescript": "^5.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

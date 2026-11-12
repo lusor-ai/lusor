@@ -1,0 +1,55 @@
+name: Bug report
+description: Something in this repository does not work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For problems with the Lusor app, a Lusor Phone or your account, see the [Help Center](https://docs.lusor.ai/help/index) or ask on [Discord](https://discord.gg/9tET4gQPV4). Report security issues privately, as described in [SECURITY.md](https://github.com/lusor-ai/lusor/security/policy), not here.
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - packages/sdk
+        - packages/format
+        - skills
+        - apps/ios-wda (iPhone driver)
+        - apps/shared-adb-lib
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, including the full error message or output.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code or command sequence that shows the problem.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "@lusor/sdk 1.0.0, or a commit SHA"
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, runtime (Node, Bun, Xcode, Rust), and the phone model and OS version if a device is involved.

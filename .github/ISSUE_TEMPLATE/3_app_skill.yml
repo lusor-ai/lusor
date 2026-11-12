@@ -1,0 +1,34 @@
+name: App skill request
+description: Ask for a skill that teaches agents to use a specific app, or report a skill that no longer matches the app.
+labels: ["app-skill"]
+body:
+  - type: input
+    id: app
+    attributes:
+      label: App
+      description: The app's name and its package (Android) or bundle id (iOS), if you know it.
+      placeholder: "Instagram (com.instagram.android)"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Android
+        - iOS
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: What should an agent be able to do in it?
+      description: The tasks you'd hand to an agent, in plain language.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything that trips agents up
+      description: Screens, menus or flows that are easy to get wrong. For an existing skill, what changed in the app.

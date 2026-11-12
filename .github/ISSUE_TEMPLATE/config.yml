@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and help
+    url: https://discord.gg/9tET4gQPV4
+    about: Ask the community and the Lusor team on Discord.
+  - name: Lusor app, Lusor Phones and billing
+    url: https://docs.lusor.ai/help/index
+    about: Help Center for the Lusor app, phones, plans and your account.
+  - name: Documentation
+    url: https://docs.lusor.ai
+    about: Guides and the API reference.

@@ -14,6 +14,8 @@ export interface RoutineCreateInput {
     workspaceId: string;
     /** Agent id. */
     agentId: string;
+    /** The routine's display name. Omitted or blank, it is the first 60 characters of the prompt. */
+    name?: string;
     prompt: string;
     cadenceMinutes: number;
     /** The first run; default one cadence from now. */

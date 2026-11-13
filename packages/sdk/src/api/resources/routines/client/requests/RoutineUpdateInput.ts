@@ -15,6 +15,7 @@ export interface RoutineUpdateInput {
     agentId: string;
     /** Routine id. */
     routineId: string;
+    name?: string;
     prompt?: string;
     cadenceMinutes?: number;
     /** The next run. */

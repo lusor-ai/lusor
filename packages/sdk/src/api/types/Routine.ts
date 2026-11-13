@@ -5,6 +5,8 @@ export interface Routine {
     agentId: string;
     /** The user the routine runs as. */
     createdBy: string;
+    /** The routine's display name, 1 to 80 characters. */
+    name: string;
     prompt: string;
     cadenceMinutes: number;
     /** The next run. */

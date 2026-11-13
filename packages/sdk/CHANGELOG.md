@@ -4,6 +4,14 @@ All notable changes to `@lusor/sdk` are documented here. The format
 follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this
 package uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.0 — 2026-11-13
+
+Added:
+
+- Routines: give a routine a display name (`name` on `routines.create`
+  and `routines.update`), returned on every routine. Without one, a
+  routine is named after the first 60 characters of its prompt.
+
 ## 1.1.0 — 2026-11-12
 
 Added:

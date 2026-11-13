@@ -1,6 +1,6 @@
 {
   "name": "@lusor/sdk",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "TypeScript client for the Lusor API: agent runs, sessions, devices and direct phone control. Generated from the Lusor OpenAPI specification.",
   "homepage": "https://docs.lusor.ai",
   "bugs": {

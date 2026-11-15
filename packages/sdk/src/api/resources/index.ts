@@ -4,6 +4,8 @@ export * from "./agents/types/index.js";
 export * as appInstalls from "./appInstalls/index.js";
 export * from "./appInstalls/client/requests/index.js";
 export * from "./appInstalls/types/index.js";
+export * as billing from "./billing/index.js";
+export * from "./billing/types/index.js";
 export * as catalog from "./catalog/index.js";
 export * from "./catalog/client/requests/index.js";
 export * from "./catalog/types/index.js";

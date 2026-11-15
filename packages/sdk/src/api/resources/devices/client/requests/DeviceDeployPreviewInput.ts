@@ -19,9 +19,19 @@ export interface DeviceDeployPreviewInput {
     /**
      * The connection type the phone is bought with. `rotating` births the
      * phone without a Static IP; `persistent` (and absent) gives it one
-     * where the country is covered.
+     * where the country is covered. `byop` connects every new phone to
+     * one of your saved proxies (`byopProxyId`); it requires an App
+     * tier with bring-your-own-proxy and does not change the price.
      */
     internetConnection?: DeviceDeployPreviewInput.InternetConnection;
+    /**
+     * With `internetConnection: byop` only (required then): the id of one
+     * of your saved proxies from `GET /v1/proxies?kind=user-provided`.
+     * An unknown proxy answers 404 `unknown_proxy`; a deactivated one
+     * 409 `proxy_deactivated`; an App tier without bring-your-own-proxy
+     * 402 `tier_limit`.
+     */
+    byopProxyId?: string;
     /**
      * How many Lusor Phones to add. More than the App tier's free phone
      * slots answers 402 `tier_phone_limit`; more than 100 phones on the
@@ -34,11 +44,14 @@ export namespace DeviceDeployPreviewInput {
     /**
      * The connection type the phone is bought with. `rotating` births the
      * phone without a Static IP; `persistent` (and absent) gives it one
-     * where the country is covered.
+     * where the country is covered. `byop` connects every new phone to
+     * one of your saved proxies (`byopProxyId`); it requires an App
+     * tier with bring-your-own-proxy and does not change the price.
      */
     export const InternetConnection = {
         Rotating: "rotating",
         Persistent: "persistent",
+        Byop: "byop",
     } as const;
     export type InternetConnection = (typeof InternetConnection)[keyof typeof InternetConnection];
 }

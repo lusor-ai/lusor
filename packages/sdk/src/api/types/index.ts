@@ -105,6 +105,7 @@ export * from "./RecentChainStep.js";
 export * from "./RecordingFinalizationStatus.js";
 export * from "./RetargetQueuedTurnsResult.js";
 export * from "./Routine.js";
+export * from "./RunSource.js";
 export * from "./ScreenshotChainStep.js";
 export * from "./SecretTag.js";
 export * from "./SessionArtifacts.js";

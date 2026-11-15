@@ -4,6 +4,24 @@ All notable changes to `@lusor/sdk` are documented here. The format
 follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this
 package uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0 — 2026-11-15
+
+Added:
+
+- Billing: read the workspace's plan and the credits it has left
+  (`billing.getPlan`).
+- Run sources: sessions, agent turns and a phone's occupancy say what
+  started each run, such as the Lusor app, an agent, an API key, a
+  connected AI app over MCP, or a routine (`source`).
+- Runs from AI apps: list the threads of runs started from connected AI
+  apps and API keys (`sessions.listOutsideApps`), and the runs in one
+  thread (`sessions.listOutsideAppRuns`).
+- Phones: list a phone's recent runs (`devices.listDeviceActivity`).
+- Lusor Phones: deploy new phones on one of your saved proxies. Choose
+  it on the deploy preview (`internetConnection: "byop"` with
+  `byopProxyId` on `devices.previewDeploy`), then confirm with
+  `devices.deploy`.
+
 ## 1.2.0 — 2026-11-13
 
 Added:

@@ -15,4 +15,5 @@ export interface SessionDetail extends Lusor.SessionV2 {
     outputExpiresAt?: (string | null) | undefined;
     nameExpiresAt?: (string | null) | undefined;
     errorExpiresAt?: (string | null) | undefined;
+    source?: Lusor.RunSource | undefined;
 }

@@ -4034,6 +4034,99 @@ export class DevicesClient {
     }
 
     /**
+     * Same paging and turn shape as `GET /v1/agents/{id}/turns`. `agentId` is set
+     * for an agent's runs and null otherwise; `source` says what started each run.
+     *
+     * @param {Lusor.ListDeviceActivityRequest} request
+     * @param {DevicesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Lusor.BadRequestError}
+     * @throws {@link Lusor.UnauthorizedError}
+     * @throws {@link Lusor.NotFoundError}
+     * @throws {@link errors.LusorError}
+     * @throws {@link errors.LusorTimeoutError}
+     *
+     * @example
+     *     await client.devices.listDeviceActivity({
+     *         workspaceId: "workspaceId",
+     *         deviceId: "deviceId"
+     *     })
+     */
+    public listDeviceActivity(
+        request: Lusor.ListDeviceActivityRequest,
+        requestOptions?: DevicesClient.RequestOptions,
+    ): core.HttpResponsePromise<Lusor.AgentTurnPageResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listDeviceActivity(request, requestOptions));
+    }
+
+    private async __listDeviceActivity(
+        request: Lusor.ListDeviceActivityRequest,
+        requestOptions?: DevicesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Lusor.AgentTurnPageResponse>> {
+        const { workspaceId, deviceId, cursor, limit } = request;
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            limit,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LusorEnvironment.Production,
+                `v1/workspaces/${core.url.encodePathParam(workspaceId)}/devices/${core.url.encodePathParam(deviceId)}/activity`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Lusor.AgentTurnPageResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Lusor.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Lusor.UnauthorizedError(
+                        _response.error.body as Lusor.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new Lusor.NotFoundError(_response.error.body as Lusor.ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.LusorError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/workspaces/{workspaceId}/devices/{deviceId}/activity",
+        );
+    }
+
+    /**
      * `{ name }` renames the phone. `{ workspaceId }` moves it to another
      * workspace of the same organization; with both, the move runs first.
      *

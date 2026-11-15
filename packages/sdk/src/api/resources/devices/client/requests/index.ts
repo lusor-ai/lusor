@@ -20,6 +20,7 @@ export type { GetStaticIpDevicesRequest } from "./GetStaticIpDevicesRequest.js";
 export type { GetStaticIpReplacementDevicesRequest } from "./GetStaticIpReplacementDevicesRequest.js";
 export type { HomeDevicesRequest } from "./HomeDevicesRequest.js";
 export type { KeyInput } from "./KeyInput.js";
+export type { ListDeviceActivityRequest } from "./ListDeviceActivityRequest.js";
 export type { ListDevicesRequest } from "./ListDevicesRequest.js";
 export type { ListInternetLocationsRequest } from "./ListInternetLocationsRequest.js";
 export type { ListInWorkspaceDevicesRequest } from "./ListInWorkspaceDevicesRequest.js";

@@ -31,7 +31,7 @@ app_package: com.amazon.mShop.android.shopping
 - After tapping a product, the detail page loads in 1-2s.
 - The **Add to Cart** button is usually below the fold. Scroll down to find it.
 - Resource ID for Add to Cart: `com.amazon.mShop.android.shopping:id/add-to-cart-button`
-- "Buy Now" button is nearby; do NOT tap it unless checkout is the goal.
+- "Buy Now" is nearby and places the order in one step: use it when the user asks to buy now; otherwise add to cart.
 - Product title, price, and rating are near the top of the page.
 
 ## Cart

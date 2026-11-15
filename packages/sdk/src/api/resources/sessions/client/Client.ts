@@ -1638,4 +1638,180 @@ export class SessionsClient {
             "/v1/sessions/{id}/replay/frame",
         );
     }
+
+    /**
+     * One thread per outside app (an MCP client such as Claude or ChatGPT, or an API
+     * key), newest activity first. Runs of a known app share one thread whatever key
+     * started them. `liveSessionId` is a run that currently holds a phone, if any.
+     *
+     * @param {Lusor.ListOutsideAppsRequest} request
+     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Lusor.UnauthorizedError}
+     * @throws {@link Lusor.NotFoundError}
+     * @throws {@link errors.LusorError}
+     * @throws {@link errors.LusorTimeoutError}
+     *
+     * @example
+     *     await client.sessions.listOutsideApps({
+     *         workspaceId: "workspaceId"
+     *     })
+     */
+    public listOutsideApps(
+        request: Lusor.ListOutsideAppsRequest,
+        requestOptions?: SessionsClient.RequestOptions,
+    ): core.HttpResponsePromise<Lusor.ListOutsideAppsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listOutsideApps(request, requestOptions));
+    }
+
+    private async __listOutsideApps(
+        request: Lusor.ListOutsideAppsRequest,
+        requestOptions?: SessionsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Lusor.ListOutsideAppsResponse>> {
+        const { workspaceId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LusorEnvironment.Production,
+                `v1/workspaces/${core.url.encodePathParam(workspaceId)}/outside-apps`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Lusor.ListOutsideAppsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new Lusor.UnauthorizedError(
+                        _response.error.body as Lusor.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new Lusor.NotFoundError(_response.error.body as Lusor.ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.LusorError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/workspaces/{workspaceId}/outside-apps",
+        );
+    }
+
+    /**
+     * Paged exactly like `GET /v1/agents/{id}/turns`: newest page first, `turns`
+     * oldest-first within a page, `nextCursor` for the next older page. Each turn
+     * carries `agentId` (null) and `source`.
+     *
+     * @param {Lusor.ListOutsideAppRunsRequest} request
+     * @param {SessionsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Lusor.BadRequestError}
+     * @throws {@link Lusor.UnauthorizedError}
+     * @throws {@link Lusor.NotFoundError}
+     * @throws {@link errors.LusorError}
+     * @throws {@link errors.LusorTimeoutError}
+     *
+     * @example
+     *     await client.sessions.listOutsideAppRuns({
+     *         workspaceId: "workspaceId",
+     *         threadId: "threadId"
+     *     })
+     */
+    public listOutsideAppRuns(
+        request: Lusor.ListOutsideAppRunsRequest,
+        requestOptions?: SessionsClient.RequestOptions,
+    ): core.HttpResponsePromise<Lusor.ListOutsideAppRunsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listOutsideAppRuns(request, requestOptions));
+    }
+
+    private async __listOutsideAppRuns(
+        request: Lusor.ListOutsideAppRunsRequest,
+        requestOptions?: SessionsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Lusor.ListOutsideAppRunsResponse>> {
+        const { workspaceId, threadId, cursor, limit } = request;
+        const _queryParams: Record<string, unknown> = {
+            cursor,
+            limit,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LusorEnvironment.Production,
+                `v1/workspaces/${core.url.encodePathParam(workspaceId)}/outside-apps/${core.url.encodePathParam(threadId)}/runs`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Lusor.ListOutsideAppRunsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Lusor.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Lusor.UnauthorizedError(
+                        _response.error.body as Lusor.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new Lusor.NotFoundError(_response.error.body as Lusor.ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.LusorError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/workspaces/{workspaceId}/outside-apps/{threadId}/runs",
+        );
+    }
 }

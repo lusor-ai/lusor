@@ -2,6 +2,7 @@
 
 import { AgentsClient } from "./api/resources/agents/client/Client.js";
 import { AppInstallsClient } from "./api/resources/appInstalls/client/Client.js";
+import { BillingClient } from "./api/resources/billing/client/Client.js";
 import { CatalogClient } from "./api/resources/catalog/client/Client.js";
 import { DatasetsClient } from "./api/resources/datasets/client/Client.js";
 import { DevicesClient } from "./api/resources/devices/client/Client.js";
@@ -40,6 +41,7 @@ export class LusorClient {
     protected _datasets: DatasetsClient | undefined;
     protected _agents: AgentsClient | undefined;
     protected _workspaces: WorkspacesClient | undefined;
+    protected _billing: BillingClient | undefined;
     protected _modelKeys: ModelKeysClient | undefined;
     protected _files: FilesClient | undefined;
     protected _notifications: NotificationsClient | undefined;
@@ -88,6 +90,10 @@ export class LusorClient {
 
     public get workspaces(): WorkspacesClient {
         return (this._workspaces ??= new WorkspacesClient(this._options));
+    }
+
+    public get billing(): BillingClient {
+        return (this._billing ??= new BillingClient(this._options));
     }
 
     public get modelKeys(): ModelKeysClient {

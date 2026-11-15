@@ -8,6 +8,8 @@ export type { GetLegacySessionsRequest } from "./GetLegacySessionsRequest.js";
 export type { GetSessionsRequest } from "./GetSessionsRequest.js";
 export type { GetUiStateSessionsRequest } from "./GetUiStateSessionsRequest.js";
 export type { HistoryPolicySessionsRequest } from "./HistoryPolicySessionsRequest.js";
+export type { ListOutsideAppRunsRequest } from "./ListOutsideAppRunsRequest.js";
+export type { ListOutsideAppsRequest } from "./ListOutsideAppsRequest.js";
 export type { ListSessionsRequest } from "./ListSessionsRequest.js";
 export type { RecordingSessionsRequest } from "./RecordingSessionsRequest.js";
 export type { ReplayFrameSessionsRequest } from "./ReplayFrameSessionsRequest.js";
